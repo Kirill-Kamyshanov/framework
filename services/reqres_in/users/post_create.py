@@ -22,4 +22,5 @@ class CreateUser(BaseAPI):
         """
         data = {"name": name, "job": job}
         response = self.session.post(f"{self.base_url}/users", json=data)
+        # print(response.json())
         return response
