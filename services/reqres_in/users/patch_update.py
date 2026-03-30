@@ -1,8 +1,6 @@
 from services.base_api import BaseAPI
 
-
-class CreateUser(BaseAPI):
-
+class UpdateUser(BaseAPI):
     def __init__(self, env_config):
         """
         Args:
@@ -10,16 +8,17 @@ class CreateUser(BaseAPI):
         """
         super().__init__(base_url=env_config.reqres_url, api_key=env_config.reqres_api_key)
 
-    def create_user(self, name: str, job: str):
-        """Создание нового пользователя.
+    def update(self, user_id: int, name: str, job: str):
+        """Обновление данных пользователя.
 
         Args:
-            name (str): Имя пользователя
-            job (str): Должность пользователя
+            user_id (int): ID пользователя
+            name (str): Новое имя
+            job (str): Новая должность
 
         Returns:
             requests.Response: Ответ от сервера
         """
         data = {"name": name, "job": job}
-        response = self.session.post(f"{self.base_url}/users", json=data)
+        response = self.session.patch(f"{self.base_url}/users/{user_id}", json=data)
         return response

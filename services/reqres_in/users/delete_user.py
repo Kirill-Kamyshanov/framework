@@ -1,8 +1,6 @@
 from services.base_api import BaseAPI
 
-
-class CreateUser(BaseAPI):
-
+class DeleteUser(BaseAPI):
     def __init__(self, env_config):
         """
         Args:
@@ -10,16 +8,13 @@ class CreateUser(BaseAPI):
         """
         super().__init__(base_url=env_config.reqres_url, api_key=env_config.reqres_api_key)
 
-    def create_user(self, name: str, job: str):
-        """Создание нового пользователя.
-
+    def delete(self, user_id):
+        """Удаление пользователя
         Args:
-            name (str): Имя пользователя
-            job (str): Должность пользователя
+            user_id (int): ID пользователя
 
         Returns:
             requests.Response: Ответ от сервера
         """
-        data = {"name": name, "job": job}
-        response = self.session.post(f"{self.base_url}/users", json=data)
+        response = self.session.delete(f'{self.base_url}/{user_id}')
         return response

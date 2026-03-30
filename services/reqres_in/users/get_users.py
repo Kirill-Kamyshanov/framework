@@ -1,6 +1,6 @@
 from services.base_api import BaseAPI
 
-class GetUser(BaseAPI):
+class GetUsers(BaseAPI):
     def __init__(self, env_config):
         """
         Args:
@@ -9,7 +9,7 @@ class GetUser(BaseAPI):
         super().__init__(base_url=env_config.reqres_url, api_key=env_config.reqres_api_key)
 
 
-    def get_user(self, user_id: int):
+    def get_users(self):
         """Получение пользователя по ID.
 
                Args:
@@ -18,5 +18,5 @@ class GetUser(BaseAPI):
                Returns:
                    requests.Response: Ответ от сервера
                """
-        response = self.session.get(f"{self.base_url}/users/{user_id}")
+        response = self.session.get(f"{self.base_url}/users")
         return response
